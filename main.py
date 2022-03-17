@@ -31,7 +31,7 @@ if 'GITHUB_TOKEN' in os.environ:
     deu_id = os.environ['DEU_ID_CHACHA']
     deu_pw = os.environ['DEU_PW_CHACHA']
     githubCall = True
-    
+
 repository_name = "dap-macro"
 
 options = webdriver.ChromeOptions()
@@ -54,6 +54,9 @@ driver.get("https://dap.deu.ac.kr/sso/login.aspx")
 driver.maximize_window()
 driver.find_element_by_xpath('//*[@id="txt_id"]').send_keys(deu_id)
 driver.find_element_by_xpath('//*[@id="txt_password"]').send_keys(deu_pw)
+
+time.sleep(3)
+
 driver.find_element_by_xpath('//*[@id="BtnLogIn"]').click()
 
 time.sleep(5)
