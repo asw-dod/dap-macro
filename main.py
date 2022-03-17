@@ -43,7 +43,7 @@ options.add_argument("disable-gpu")
 options.add_argument("--no-sandbox")
 
 # chrome driver
-driver = webdriver.Chrome('./chromedriver', chrome_options=options)
+driver = webdriver.Chrome('chromedriver', chrome_options=options)
 
 seoul_timezone = timezone('Asia/Seoul')
 today = datetime.now(seoul_timezone)
