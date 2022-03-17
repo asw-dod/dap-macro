@@ -20,7 +20,7 @@ def upload_github_issue(repo, title, body):
 def delete_github_issue(repo):
     issues = repo.get_issues(state='open')
     for issue in issues:
-        if "날짜 발열 테스트" in issue.title:
+        if "DAP 정보 수집기" in issue.title:
             issue.edit(state='closed')
             print(issue.title)
 
