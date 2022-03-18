@@ -18,7 +18,7 @@ jobs:
         name: Docker meta
         id: docker_meta
         with:
-          images: aoikazto/aswcloud-server
+          images: aoikazto/load-dap
           tag-semver: |
             {{version}}
             {{major}}.{{minor}}
