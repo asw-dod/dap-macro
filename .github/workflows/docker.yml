@@ -19,3 +19,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
         DEU_ID_CHACHA: ${{ secrets.DEU_ID_CHACHA }}
         DEU_PW_CHACHA: ${{ secrets.DEU_PW_CHACHA }}
+    steps:
+      - run: |
+          python /app/main.py
