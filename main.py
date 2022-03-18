@@ -9,9 +9,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from github import Github
 
-def get_github_repo(access_token, repository_name):
+def get_github_repo(access_token, org_name: str, repository_name: str):
     g = Github(access_token)
-    repo = g.get_organization('asw-dod').get_repo(repository_name)
+    repo = g.get_organization(org_name).get_repo(repository_name)
     return repo
 
 def upload_github_issue(repo, title, body):
@@ -25,14 +25,13 @@ def delete_github_issue(repo):
             print(issue.title)
 
 
-githubCall = False
-if 'GITHUB_TOKEN' in os.environ:
-    access_token = os.environ['GITHUB_TOKEN']
-    deu_id = os.environ['DEU_ID_CHACHA']
-    deu_pw = os.environ['DEU_PW_CHACHA']
-    githubCall = True
+githubCall = True
+access_token = os.environ['GITHUB_TOKEN']
+deu_id = os.environ['DEU_ID_CHACHA']
+deu_pw = os.environ['DEU_PW_CHACHA']
+repository_name = os.environ['REPO_NAME'] # dap-macro
+org_name = os.environ['ORG_NAME']         # asw-dod
 
-repository_name = "dap-macro"
 
 options = webdriver.ChromeOptions()
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
@@ -134,7 +133,7 @@ today = datetime.now(seoul_timezone)
 today_data = today.strftime("%Y년 %m월 %d일 %H시 %M분 : %S초")
 
 if githubCall:
-    repo = get_github_repo(access_token, repository_name)
+    repo = get_github_repo(access_token, org_name, repository_name)
     delete_github_issue(repo)
         
     title = f"DAP 정보 수집기 : ({today_data})"
