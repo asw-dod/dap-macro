@@ -1,0 +1,6 @@
+selenium
+requests
+twython
+pillow
+PyGithub
+pytz

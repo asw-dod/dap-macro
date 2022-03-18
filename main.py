@@ -32,15 +32,22 @@ if 'GITHUB_TOKEN' in os.environ:
     deu_pw = os.environ['DEU_PW_CHACHA']
     githubCall = True
 
+
 repository_name = "dap-macro"
 
 options = webdriver.ChromeOptions()
-options.add_argument("start-maximized")
-options.add_argument("lang=ko_KR")
-options.add_argument('headless')
-options.add_argument('window-size=1920x1080')
-options.add_argument("disable-gpu")
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+options.add_argument('user-agent=' + user_agent)
+options.add_argument("window-size=1920x1080") # 화면크기(전체화면)
+options.add_argument('--start-maximized') #브라우저가 최대화된 상태로 실행됩니다.
+options.add_argument('--start-fullscreen') #브라우저가 풀스크린 모드(F11)로 실행됩니다.
+options.add_argument('--headless')
+options.add_argument('--incognito')
 options.add_argument("--no-sandbox")
+options.add_argument("--disable-gpu") 
+options.add_argument("--disable-infobars")
+options.add_argument("--disable-extensions")
+options.add_argument('--disable-dev-shm-usage')
 
 # chrome driver
 driver = webdriver.Chrome('chromedriver', chrome_options=options)
@@ -49,16 +56,13 @@ seoul_timezone = timezone('Asia/Seoul')
 today = datetime.now(seoul_timezone)
 today_data = today.strftime("%Y년 %m월 %d일 %H시 %M분 : %S초")
 
-
 driver.get("https://dap.deu.ac.kr/sso/login.aspx")
-driver.maximize_window()
 driver.find_element_by_xpath('//*[@id="txt_id"]').send_keys(deu_id)
 driver.find_element_by_xpath('//*[@id="txt_password"]').send_keys(deu_pw)
 
-time.sleep(3)
+time.sleep(5)
 
 driver.find_element_by_xpath('//*[@id="BtnLogIn"]').click()
-
 time.sleep(5)
 
 driver.find_element_by_xpath('//*[@id="topmenu"]/ul/li[1]/a').click()
@@ -75,7 +79,7 @@ for i in range(0, 6):
     t = '//*[@id="content"]/div[3]/div/ul/li[' + str(i + 1) + ']'
     print(t)
     driver.find_element_by_xpath(t).click()
-    time.sleep(3)
+    time.sleep(5)
     
     row_xpath = ""
     if i == 4:
