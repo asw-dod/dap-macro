@@ -60,29 +60,38 @@ today_data = today.strftime("%Y년 %m월 %d일 %H시 %M분 : %S초")
 driver.get("https://dap.deu.ac.kr/sso/login.aspx")
 driver.find_element_by_xpath('//*[@id="txt_id"]').send_keys(deu_id)
 driver.find_element_by_xpath('//*[@id="txt_password"]').send_keys(deu_pw)
-
-time.sleep(5)
-
 driver.find_element_by_xpath('//*[@id="BtnLogIn"]').click()
-time.sleep(5)
+time.sleep(3)
 
 driver.switch_to.window(own_window_handle)
+
+titleTitle = ["비교과", "학사공지", "취업공지", "교외행사", "취업교과목", "인턴십", "장학공지", "기숙사공지", "비교과공지", "개인정보활용공지"]
+text = []
+totalText = {}
+nyanya = 0
+
+
+text_row = []
+table_row = driver.find_elements_by_xpath('//*[@id="mCSB_4_container"]/ul/li')
+for idx, data in enumerate(table_row):
+    title = data.get_attribute('innerText')
+    title = title.split('\n')[0]
+    text_row.append({"title": title, "date": "0000.00.00"})
+totalText[titleTitle[nyanya]] = {"notice": text_row}
+nyanya += 1
 
 driver.find_element_by_xpath('//*[@id="topmenu"]/ul/li[1]/a').click()
 
 time.sleep(5)
 
 
-titleTitle = ["학사공지", "취업공지", "교외행사", "취업교과목", "인턴십", "장학공지", "기숙사공지", "비교과공지", "개인정보활용공지"]
-text = []
-totalText = {}
-nyanya = 0
+
 
 for i in range(0, 6):
     t = '//*[@id="content"]/div[3]/div/ul/li[' + str(i + 1) + ']'
     print(t)
     driver.find_element_by_xpath(t).click()
-    time.sleep(5)
+    time.sleep(4)
     
     row_xpath = ""
     if i == 4:
