@@ -3,8 +3,8 @@ services:
   dap:
     image: aoikazto/load-dap
     environment:
-      GITHUB_TOKEN: "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"
-      DEU_ID_CHACHA: "20183221"
-      DEU_PW_CHACHA: "ckwngud1!"
+      GITHUB_TOKEN: ""
+      DEU_ID_CHACHA: ""
+      DEU_PW_CHACHA: "!"
       ORG_NAME: "asw-dod"
       REPO_NAME: "dap-macro"
