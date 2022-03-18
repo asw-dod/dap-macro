@@ -1,0 +1,25 @@
+name: Docker Run
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 3 * * *'
+
+jobs:
+  run:
+    name: Send Data
+    runs-on: ubuntu-20.04
+    container:
+      image: aoikazto/load-dap:latest
+      
+    steps:
+    - name: Run main.py
+      run: python main.py
+      env:
+        ORG_NAME: "asw-dod"
+        REPO_NAME: "dap-macro"
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        DEU_ID_CHACHA: ${{ secrets.DEU_ID_CHACHA }}
+        DEU_PW_CHACHA: ${{ secrets.DEU_PW_CHACHA }}
