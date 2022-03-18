@@ -32,7 +32,6 @@ if 'GITHUB_TOKEN' in os.environ:
     deu_pw = os.environ['DEU_PW_CHACHA']
     githubCall = True
 
-
 repository_name = "dap-macro"
 
 options = webdriver.ChromeOptions()
@@ -52,6 +51,9 @@ options.add_argument('--disable-dev-shm-usage')
 # chrome driver
 driver = webdriver.Chrome('chromedriver', chrome_options=options)
 
+print(driver.current_window_handle)
+own_window_handle = driver.current_window_handle
+
 seoul_timezone = timezone('Asia/Seoul')
 today = datetime.now(seoul_timezone)
 today_data = today.strftime("%Y년 %m월 %d일 %H시 %M분 : %S초")
@@ -64,6 +66,8 @@ time.sleep(5)
 
 driver.find_element_by_xpath('//*[@id="BtnLogIn"]').click()
 time.sleep(5)
+
+driver.switch_to.window(own_window_handle)
 
 driver.find_element_by_xpath('//*[@id="topmenu"]/ul/li[1]/a').click()
 
