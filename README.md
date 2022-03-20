@@ -1,3 +1,7 @@
+# Github Action 처리 근황
+
+[![Docker Image CI](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml) [![Docker Run](https://github.com/asw-dod/dap-macro/actions/workflows/docker.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker.yml) [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/aoikazto/load-dap/latest)](https://hub.docker.com/repository/docker/aoikazto/load-dap)
+
 # Dap Macro 어떻게 동작하나요?
 
 Github에 코드를 작성 한 뒤, Tag 정보를 달게 된다면 Github Action에서 이벤트가 발생하여 도커 빌드를 한 뒤, 도커 허브에 이미지를 푸시 하게 됩니다.
@@ -23,6 +27,3 @@ UTC 시간 기준 매일 1시, 9시에 갱신이 됩니다. 한국 시간 기준
 > https://api.github.com/repos/asw-dod/dap-macro/issues
 
 
-# Github Action 처리 근황
-
-[![Docker Image CI](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml) [![Docker Run](https://github.com/asw-dod/dap-macro/actions/workflows/docker.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker.yml)
