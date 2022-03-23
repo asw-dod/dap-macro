@@ -77,10 +77,12 @@ def getDeu(boardLength: int):
         driver.get('https://www.deu.ac.kr/www/board/3/' + str(idx + 1))
         itemList = driver.find_elements_by_xpath('//*[@id="tablelist"]/tbody/tr')
         for idx in range(0, len(itemList)): 
-            ino = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[1]').get_attribute('innerText')
-            title = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[2]').get_attribute('innerText')
-            writer = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[3]').get_attribute('innerText')
-            date = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[4]').get_attribute('innerText')
+            ino = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/th[1]').get_attribute('innerText')
+            if ino == '공지':
+                continue
+            title = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[1]').get_attribute('innerText')
+            writer = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[2]').get_attribute('innerText')
+            date = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[3]').get_attribute('innerText')
             # text_row.append({"title": title, "date": date})
             text.append({'title': title, 'date': date, 'writer': writer})
     return text
@@ -99,8 +101,6 @@ today_data = today.strftime("%Y년 %m월 %d일 %H시 %M분 : %S초")
 result = json.dumps(text, ensure_ascii=False)
 
 access_token = os.environ['GITHUB_TOKEN']
-deu_id = os.environ['DEU_ID_CHACHA']
-deu_pw = os.environ['DEU_PW_CHACHA']
 repository_name = os.environ['REPO_NAME'] # dap-macro
 org_name = os.environ['ORG_NAME']         # asw-dod
 

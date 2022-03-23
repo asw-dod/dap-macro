@@ -45,5 +45,3 @@ jobs:
         ORG_NAME: "asw-dod"
         REPO_NAME: "dap-macro"
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        DEU_ID_CHACHA: ${{ secrets.DEU_ID_CHACHA }}
-        DEU_PW_CHACHA: ${{ secrets.DEU_PW_CHACHA }}
