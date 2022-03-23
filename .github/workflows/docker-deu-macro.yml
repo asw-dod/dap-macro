@@ -40,7 +40,7 @@ jobs:
         
     - name: run macro
       run: |
-        python /app/other.py
+        python other.py
       env:
         ORG_NAME: "asw-dod"
         REPO_NAME: "dap-macro"
