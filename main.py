@@ -57,6 +57,8 @@ seoul_timezone = timezone('Asia/Seoul')
 today = datetime.now(seoul_timezone)
 today_data = today.strftime("%Y년 %m월 %d일 %H시 %M분 : %S초")
 
+# DAP 로그인
+# 프록시 서버를 이용하거나 VPN을 이용하면 막히기 때문에 학교 망을 이용하거나, 개인 컴퓨터를 활용 해야함.
 driver.get("https://dap.deu.ac.kr/sso/login.aspx")
 driver.find_element_by_xpath('//*[@id="txt_id"]').send_keys(deu_id)
 driver.find_element_by_xpath('//*[@id="txt_password"]').send_keys(deu_pw)
@@ -70,21 +72,29 @@ text = []
 totalText = {}
 nyanya = 0
 
+driver.find_element_by_xpath('//*[@id="Mcont02"]/div[4]/div[1]/ul/li[1]/a[2]').click();
+time.sleep(3)
 
 text_row = []
-table_row = driver.find_elements_by_xpath('//*[@id="mCSB_4_container"]/ul/li')
+table_row = driver.find_elements_by_xpath('//*[@id="CP1_grdView"]/tbody/tr')
 for idx, data in enumerate(table_row):
-    title = data.get_attribute('innerText')
-    title = title.split('\n')[0]
-    text_row.append({"title": title, "date": "0000.00.00"})
+    programCount = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[1]').get_attribute('innerText')
+    title = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[2]').get_attribute('innerText')
+    depart = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[3]').get_attribute('innerText')
+    receptionTime = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[4]').get_attribute('innerText')
+    playTime = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[5]').get_attribute('innerText')
+    
+    text_row.append({"sessionCount": programCount, 
+                     "title": title, 
+                     "department": depart, 
+                     "receptionTime": receptionTime, 
+                     "playTime": playTime})
+    
 totalText[titleTitle[nyanya]] = {"notice": text_row}
 nyanya += 1
 
 driver.find_element_by_xpath('//*[@id="topmenu"]/ul/li[1]/a').click()
-
 time.sleep(5)
-
-
 
 
 for i in range(0, 6):
@@ -107,8 +117,9 @@ for i in range(0, 6):
             continue
         
         title = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[2]/a').get_attribute('innerText')
+        department = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[3]').get_attribute('innerText')
         date = data.find_element_by_xpath('//tr[' + str(idx + 1) + ']//td[4]').get_attribute('innerText')
-        text_row.append({"title": title, "date": date})
+        text_row.append({"title": title, "date": date, "department": department})
         
     totalText[titleTitle[nyanya]] = {"notice": text_row}
     nyanya += 1
