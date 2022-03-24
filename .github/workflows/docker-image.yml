@@ -44,3 +44,62 @@ jobs:
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
+
+  deploy:
+    needs: docker-deploy
+    runs-on: ubuntu-latest
+    steps:
+    # 최근 푸시한 태그 정보를 가져옴.
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+        with:
+          # Optionally strip `v` prefix
+          strip_v: true
+
+    # 최근 태그 정보를 출력함.
+      - name: echo currrent tag
+        run: echo ${{steps.tag.outputs.tag}}
+        
+    # 레포지토리를 클론함.
+    # 이때 푸시할 레포지토리인 argo-cd란 레포를 가져옴.
+      - uses: actions/checkout@v2
+        name: Checkout
+        with:
+          repository: asw-dod/argo-cd
+          # 다른 저장소에 push 하려면 Personal Access Token이 필요.
+          ref: main
+          token: ${{ secrets.TOKEN }}
+    
+    # DockerHub에 푸시했던 이미지 태그 정보를 k8s에 적용 하기 위해 태그를 수정함
+      - name: Update image version
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          repository: asw-dod/argo-cd
+          token: ${{ secrets.TOKEN }}
+          valueFile: 'dap-macro/cronjob-macro.yaml'
+          propertyPath: 'spec.jobTemplate.spec.template.spec.containers[0].image'
+          value: aoikazto/load-dap:${{steps.tag.outputs.tag}}
+          commitChange: false
+          updateFile: true
+          workDir: .
+    
+    # 커밋
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v4.4.0
+        with:
+          add: '.'
+          ref: "main"
+          author_name: 'Piorosen-Bot'
+          author_email: 'ckwngud1@gmail.com'
+          message: "[BOT] ${{ github.event.head_commit.message }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        
+    # 푸시
+      - name: Push commit
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          repository: asw-dod/argo-cd
+          branch: main
