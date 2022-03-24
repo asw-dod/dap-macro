@@ -26,4 +26,8 @@ UTC 시간 기준 매일 1시, 9시에 갱신이 됩니다. 한국 시간 기준
 아래의 API를 통해 접근 하시면 됩니다.
 > https://api.github.com/repos/asw-dod/dap-macro/issues
 
+# 기숙사 식단 정보는 어떻게 가져오나요? 
+> 기숙사 URL 에서 sch_date에서 yyyy-MM-dd 형식으로 작성해서 보내시면 됩니다.
 
+1. [효민기숙사 식단](https://dorm.deu.ac.kr/hyomin/food/getWeeklyMenu.kmc?locgbn=DE&sch_date=2022-03-24)
+2. [행복기숙사 식단](https://dorm.deu.ac.kr/deu/food/indexFoodList.kmc?locgbn=DE&sch_date=2022-03-24)
