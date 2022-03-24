@@ -1,9 +1,6 @@
 name: Github Action DEU Macro
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '0 1 * * *'
     - cron: '0 9 * * *'
