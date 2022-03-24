@@ -73,7 +73,7 @@ totalText = {}
 nyanya = 0
 
 driver.find_element_by_xpath('//*[@id="Mcont02"]/div[4]/div[1]/ul/li[1]/a[2]').click();
-time.sleep(3)
+time.sleep(4)
 
 text_row = []
 table_row = driver.find_elements_by_xpath('//*[@id="CP1_grdView"]/tbody/tr')
