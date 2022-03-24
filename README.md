@@ -1,6 +1,6 @@
 # Github Action 처리 근황
 
-[![Docker Image CI](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml) [![Docker Run](https://github.com/asw-dod/dap-macro/actions/workflows/docker.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker.yml) [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/aoikazto/load-dap/latest)](https://hub.docker.com/repository/docker/aoikazto/load-dap)
+[![Docker Image CI](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker-image.yml) [![Github Action DEU Macro](https://github.com/asw-dod/dap-macro/actions/workflows/docker-deu-macro.yml/badge.svg)](https://github.com/asw-dod/dap-macro/actions/workflows/docker-deu-macro.yml) [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/aoikazto/load-dap/latest)](https://hub.docker.com/repository/docker/aoikazto/load-dap)
 
 # Dap Macro 어떻게 동작하나요?
 
