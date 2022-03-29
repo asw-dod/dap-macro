@@ -51,8 +51,8 @@ def getDeec():
         url = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[2]/a').get_attribute('href')
         # writer = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[3]').get_attribute('innerText')
         date = itemList[idx].find_element_by_xpath('//tr[' + str(idx + 1) + ']/td[4]').get_attribute('innerText')
-        if ino == "공지":
-            continue
+#         if ino == "공지":
+#             continue
         # text_row.append({"title": title, "date": date})
         text.append({'title': title, 'date': date})
     return text
