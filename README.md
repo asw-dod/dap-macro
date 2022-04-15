@@ -35,3 +35,7 @@ UTC 시간 기준 매일 1시, 9시에 갱신이 됩니다. 한국 시간 기준
 > 기숙사 식단과 함께 학식 식단을 가지고 오고 싶으면 <br>
 https://raw.githubusercontent.com/asw-dod/Deu_food_api/master/output/api.json<br>
 사용하면됨니다
+
+API 형식 보기<Br>
+
+https://github.com/asw-dod/Deu_food_api
